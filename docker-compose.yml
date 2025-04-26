@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    image: arun0kb/restaurnat-api:latest
+    container_name: restaurant-api
+    ports:
+      - 3001:3001
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=${PORT}
+      - LIMIT=${LIMIT}

@@ -2,9 +2,6 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
     "build": "tsc && copyfiles -u 1 ./src/**/*.js ./build",
     "start": "node ./build/index.js",
