@@ -9,7 +9,7 @@ class RestaurantController implements IRestaurantController {
   constructor(
     private restaurantService: IRestaurantService
   ) { }
- 
+
 
   async getRestaurants(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -53,9 +53,16 @@ class RestaurantController implements IRestaurantController {
     }
   }
 
-
-  deleteRestaurant(req: Request, res: Response, next: NextFunction): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteRestaurant(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { restaurantId } = req.params
+      if (typeof restaurantId !== 'string') throw new HttpError(httpStatus.BAD_REQUEST, 'RestaurantId  must be a string.')
+      const serviceRes = await this.restaurantService.deleteRestaurant(restaurantId)
+      validateResponse(serviceRes)
+      res.status(httpStatus.OK).json(serviceRes.data)
+    } catch (error) {
+      next(error)
+    }
   }
 
 }
