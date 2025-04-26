@@ -38,9 +38,15 @@ class RestaurantService implements IRestaurantService {
     }
   }
 
-  updateRestaurant(restaurantId: string, restaurant: IRestaurant): ServiceReturnType<IRestaurant | null> {
-    throw new Error("Method not implemented.");
+  async updateRestaurant(restaurantId: string, restaurant: IRestaurant): ServiceReturnType<IRestaurant | null> {
+    try {
+      const updatedRestaurant = await this.restaurantRepo.findRestaurantByIdAndUpdate(restaurantId, restaurant)
+      return handleServiceData(updatedRestaurant)
+    } catch (error) {
+      throw error
+    }
   }
+
   deleteRestaurant(restaurantId: string): ServiceReturnType<IRestaurant | null> {
     throw new Error("Method not implemented.");
   }

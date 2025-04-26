@@ -39,9 +39,21 @@ class RestaurantController implements IRestaurantController {
     }
   }
 
-  updateRestaurant(req: Request, res: Response, next: NextFunction): Promise<void> {
-    throw new Error("Method not implemented.");
+  async updateRestaurant(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { restaurantId } = req.params
+      const { restaurant } = req.body
+      if (typeof restaurant !== 'object') throw new HttpError(httpStatus.BAD_REQUEST, 'Restaurant must be a object.')
+      if (typeof restaurantId !== 'string') throw new HttpError(httpStatus.BAD_REQUEST, 'RestaurantId  must be a string.')
+      const serviceRes = await this.restaurantService.updateRestaurant(restaurantId, restaurant)
+      validateResponse(serviceRes)
+      res.status(httpStatus.OK).json(serviceRes.data)
+    } catch (error) {
+      next(error)
+    }
   }
+
+
   deleteRestaurant(req: Request, res: Response, next: NextFunction): Promise<void> {
     throw new Error("Method not implemented.");
   }
