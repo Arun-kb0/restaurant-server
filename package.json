@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && copyfiles -u 1 ./src/**/*.js ./api",
-    "start": "node ./api/index.js",
+    "build": "tsc && copyfiles -u 1 ./src/**/*.js ./build",
+    "start": "node ./build/index.js",
     "dev": "nodemon ./src/index.ts"
   },
   "keywords": [],
