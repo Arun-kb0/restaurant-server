@@ -16,6 +16,10 @@ app.use(express.json())
 app.use(cors(corsOptions))
 app.use(logger)
 
+app.use('/test', (req: Request, res: Response) => {
+  res.json({ message: 'test route' })
+})
+
 app.use('/', restaurantRouter)
 
 app.use("*", (req: Request, res: Response, next: NextFunction) => {
